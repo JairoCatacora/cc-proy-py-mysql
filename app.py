@@ -1,9 +1,9 @@
-from flask import Flask, request,jsonify, render_template
-import  json
+from flask import Flask, request,jsonify
 import mysql.connector
+import time
+from mysql.connector import Error
 
 app = Flask(__name__)
-
 
 def get_db_connection():
     conn = mysql.connector.connect(
@@ -12,9 +12,8 @@ def get_db_connection():
         password="1234",
         database="inventory"
     )
+
     return conn
-
-
 
 # GET /clientes
 @app.route('/clientes', methods=['GET'])
