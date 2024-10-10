@@ -1,25 +1,25 @@
 services:  
   py-mysql:
-    build: .  # Construye la imagen de tu aplicación desde el Dockerfile en el directorio actual
+    build: . 
     ports:
-      - "5000:5000"  # Exposición del puerto 5000 para tu aplicación (API)
+      - "5000:5000"
     depends_on:
-      - mysql  # Se asegura de que MySQL esté disponible antes de iniciar la aplicación
+      - mysql 
     networks: 
-      - api-network  # Define la red donde interactúan los contenedores
+      - api-network  
 
   mysql:
-    image: mysql:5.7  # Usa la imagen de MySQL versión 5.7
+    image: mysql:5.7 
     environment:
       MYSQL_ROOT_PASSWORD: 1234
       MYSQL_DATABASE: inventory
     volumes:
       - ./data.sql:/docker-entrypoint-initdb.d/data.sql:ro
     ports:
-      - "3306:3306"  # Exposición del puerto 3306 para MySQL
+      - "3306:3306" 
     networks: 
-      - api-network  # Red compartida entre los servicios
+      - api-network  
 
 networks: 
   api-network: 
-    driver: bridge  # Define un controlador de red "bridge" para la comunicación entre contenedores
+    driver: bridge 
